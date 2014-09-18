@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtMessageTime = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.chkTimeStamps = new System.Windows.Forms.CheckBox();
             this.numLineLimit = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,8 +52,6 @@
             this.btnBrowseChatSound = new System.Windows.Forms.Button();
             this.txtChatSoundLocation = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtMessageTime = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLineLimit)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -76,6 +76,22 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chat File";
+            // 
+            // txtMessageTime
+            // 
+            this.txtMessageTime.Location = new System.Drawing.Point(9, 140);
+            this.txtMessageTime.Name = "txtMessageTime";
+            this.txtMessageTime.Size = new System.Drawing.Size(100, 20);
+            this.txtMessageTime.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 124);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(203, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Max Time Per Message (ms): -1 for infinite";
             // 
             // chkTimeStamps
             // 
@@ -170,13 +186,13 @@
             // 
             this.chkAutoChatChannel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkAutoChatChannel.AutoSize = true;
-            this.chkAutoChatChannel.Enabled = false;
             this.chkAutoChatChannel.Location = new System.Drawing.Point(227, 95);
             this.chkAutoChatChannel.Name = "chkAutoChatChannel";
             this.chkAutoChatChannel.Size = new System.Drawing.Size(121, 17);
             this.chkAutoChatChannel.TabIndex = 4;
             this.chkAutoChatChannel.Text = "Auto Chat Channel?";
             this.chkAutoChatChannel.UseVisualStyleBackColor = true;
+            this.chkAutoChatChannel.CheckedChanged += new System.EventHandler(this.chkAutoChatChannel_CheckedChanged);
             // 
             // txtChatChannel
             // 
@@ -303,22 +319,6 @@
             this.label6.Size = new System.Drawing.Size(85, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "Sound Location:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 124);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(203, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Max Time Per Message (ms): -1 for infinite";
-            // 
-            // txtMessageTime
-            // 
-            this.txtMessageTime.Location = new System.Drawing.Point(9, 140);
-            this.txtMessageTime.Name = "txtMessageTime";
-            this.txtMessageTime.Size = new System.Drawing.Size(100, 20);
-            this.txtMessageTime.TabIndex = 7;
             // 
             // SettingsForm
             // 

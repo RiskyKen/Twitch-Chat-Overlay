@@ -56,7 +56,7 @@ namespace twitch_chat_overlay
 
         void irc_OnErrorMessage(object sender, IrcEventArgs e)
         {
-            Debug.WriteLine("Error Message: " + e.Data.Message);
+            //Debug.WriteLine("Error Message: " + e.Data.Message);
         }
 
         void irc_OnChannelMessage(object sender, IrcEventArgs e)
@@ -67,19 +67,24 @@ namespace twitch_chat_overlay
 
         void irc_OnJoin(object sender, JoinEventArgs e)
         {
-            Debug.WriteLine("Join: " + e.Channel);
+            //Debug.WriteLine("Join: " + e.Channel);
         }
 
         void irc_OnRawMessage(object sender, IrcEventArgs e)
         {
             if (e.Data.Message == "Login unsuccessful") { if (OnLoginFailed != null) { OnLoginFailed.Invoke(); } }
-            Debug.WriteLine("Raw Message: " + e.Data.Message);
-            Debug.WriteLine("Raw Message: " + e.Data.RawMessage);
+
+            if (e.Data.Type == ReceiveType.Who) { return; }
+            if (e.Data.Type == ReceiveType.Join) { return; }
+            if (e.Data.Type == ReceiveType.ChannelMessage) { return; }
+
+            Debug.WriteLine("Raw Message: " + e.Data.Message + " RAW: " + e.Data.RawMessage + " TYPE: " + e.Data.Type.ToString());
+            //Debug.WriteLine("Raw Message: " + e.Data.RawMessage);
         }
 
         void irc_OnError(object sender, ErrorEventArgs e)
         {
-            Debug.WriteLine("Error: " + e.ErrorMessage);
+            //Debug.WriteLine("Error: " + e.ErrorMessage);
         }
 
         void irc_OnConnected(object sender, EventArgs e)
@@ -119,7 +124,14 @@ namespace twitch_chat_overlay
             {
                 //irc.Login("guest", "guest");
                 irc.Login(username, username, 0, username, password);
-                irc.RfcJoin("#" + userName.ToLower());
+                if (Properties.Settings.Default.AutoChatChannel)
+                {
+                    irc.RfcJoin("#" + userName.ToLower());
+                }
+                else
+                {
+                    irc.RfcJoin("#" + Properties.Settings.Default.ChatChannel);
+                }
             }
             catch (Exception)
             {
@@ -140,7 +152,7 @@ namespace twitch_chat_overlay
         {
             if (irc.IsConnected)
             {
-                return (int)irc.Lag.TotalMilliseconds;
+                return (int)irc.Lag.Milliseconds;
             }
             return 0;
         }
